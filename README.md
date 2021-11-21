@@ -13,6 +13,7 @@ For more information, please have a look at this [Medium article](https://moreil
 | GATEWAY_USERNAME | Username to SSH into the gateway host |
 | GATEWAY_PASSWORD | Password to SSH into the gateway host |
 | TARGET_HOST | Host to ultimately connect to |
+| PORT | The port on GATEWAY to use to connect to the TARGET |
 
 ## Usage example
 ```
