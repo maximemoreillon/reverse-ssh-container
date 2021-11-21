@@ -1,0 +1,16 @@
+stages:
+  - containerization
+
+variables:
+  APPLICATION_NAME: reverse-ssh
+  CONTAINER_IMAGE: ${DOCKER_HUB_USERNAME}/${APPLICATION_NAME}
+
+containerization:
+  stage: containerization
+  tags:
+    - moreillon
+  script:
+    - echo "${DOCKER_HUB_PASSWORD}" | docker login --username ${DOCKER_HUB_USERNAME} --password-stdin;
+    - docker build -t ${CONTAINER_IMAGE} .
+    - docker push ${CONTAINER_IMAGE}
+    - docker rm ${CONTAINER_IMAGE}
