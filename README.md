@@ -1,8 +1,10 @@
 # Reverse SSH container
 
-A containerized reverse SSH
+A containerized reverse SSH.
 
 ![](https://img.maximemoreillon.com/images/619a68e79a075f0b645a067e)
+
+For more information, please have a look at this [Medium article](https://moreillon.medium.com/ssh-reverse-shells-5094d9be2094).
 
 ## Environment variables
 | Variable  | Description |
