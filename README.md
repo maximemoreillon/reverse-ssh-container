@@ -22,5 +22,6 @@ docker run \
 -e GATEWAY_USERNAME=YOUR_USERNAME \
 -e GATEWAY_PASSWORD=YOUR_PASSWORD \
 -e TARGET_HOST=172.16.1.2 \
+-e PORT=7070 \
 moreillon/reverse-ssh
 ```
