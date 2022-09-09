@@ -13,3 +13,4 @@ containerization:
     - echo "${DOCKER_HUB_PASSWORD}" | docker login --username ${DOCKER_HUB_USERNAME} --password-stdin;
     - docker build -t ${CONTAINER_IMAGE} .
     - docker push ${CONTAINER_IMAGE}
+    - docker image rm ${CONTAINER_IMAGE}

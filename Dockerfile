@@ -4,10 +4,8 @@ RUN apk add --update --no-cache openssh sshpass
 
 EXPOSE ${PORT}
 
-CMD sshpass -p ${GATEWAY_PASSWORD} \
-  ssh \
-  -N \
-  -R 0.0.0.0:7070:${TARGET_HOST}:22 \
-  -o ServerAliveInterval=60 \
-  -o StrictHostKeyChecking=no \
-  ${GATEWAY_USERNAME}@${GATEWAY_HOST}
+
+COPY ./reverse_ssh.sh /reverse_ssh.sh
+RUN chmod +x /reverse_ssh.sh
+ENTRYPOINT ["/reverse_ssh.sh"]
+
