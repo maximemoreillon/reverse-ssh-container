@@ -20,7 +20,7 @@ if [ -z ${PROXY_HOST+x} ]; then
     echo "Connecting without proxy"
 else
     echo "Proxy configuration provided: ${PROXY_HOST}:${PROXY_HOST}"
-    PROXY_OPTION="-o ProxyCommand=\"ncat --proxy ${PROXY_HOST}:${PROXY_PORT} %h %p\""
+    PROXY_OPTION="-o ProxyCommand='ncat --proxy ${PROXY_HOST}:${PROXY_PORT} %h %p'"
 fi
 
 
