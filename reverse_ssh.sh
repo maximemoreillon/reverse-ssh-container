@@ -16,7 +16,7 @@ if [ -z ${OPTION+x} ]; then
     echo "No additional option provided"
 else
     echo "Additional option provided: ${OPTION}"
-    ADDITIONAL_OPTION="-o ${OPTION}"
+    CUSTOM_OPTION="-o \"${OPTION}\""
 fi
 
 
@@ -25,7 +25,7 @@ SSH_OPTIONS="-N \
     -o ServerAliveInterval=60 \
     -o StrictHostKeyChecking=no \
     -o ExitOnForwardFailure=yes \
-    ${ADDITIONAL_OPTION} \
+    ${CUSTOM_OPTION} \
     -p ${GATEWAY_PORT} \
     ${GATEWAY_USERNAME}@${GATEWAY_HOST}"
 
