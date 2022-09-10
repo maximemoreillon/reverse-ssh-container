@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 echo "Reverse SSH container by Maxime MOREILLON"
 
@@ -16,47 +16,40 @@ PROXY_PORT="${PROXY_PORT:=80}"
 
 echo "Starting reverse shell to ${TARGET_HOST}:${TARGET_PORT} using gateway ${GATEWAY_HOST}:${GATEWAY_PORT}"
 
+# Adding Proxy connection if required
 if [ -z ${PROXY_HOST+x} ]; then 
     echo "Connecting without proxy"
 else
     echo "Proxy configuration provided: ${PROXY_HOST}:${PROXY_HOST}"
-    PROXY_OPTION="-o \"ProxyCommand=ncat --proxy ${PROXY_HOST}:${PROXY_PORT} %h %p\""
+    PROXY_OPTION=(-o "ProxyCommand=ncat --proxy ${PROXY_HOST}:${PROXY_PORT} %h %p")
 fi
 
+# Setting all required flags
 
-SSH_OPTIONS="-N \
+KEY_PATH=id_rsa
+
+# Using 
+SSH_OPTIONS=(-N \
     -R 0.0.0.0:${GATEWAY_FORWARD_PORT}:${TARGET_HOST}:${TARGET_PORT} \
     -o ServerAliveInterval=60 \
     -o StrictHostKeyChecking=no \
     -o ExitOnForwardFailure=yes \
-    ${PROXY_OPTION} \
+    "${PROXY_OPTION[@]}" \
     -p ${GATEWAY_PORT} \
-    ${GATEWAY_USERNAME}@${GATEWAY_HOST}"
-
-KEY_PATH=id_rsa
-
-echo ""
-echo "[DEBUG] SSH command:"
-echo "ssh ${SSH_OPTIONS}"
-echo ""
+    ${GATEWAY_USERNAME}@${GATEWAY_HOST})
 
 
 if [ -e $KEY_PATH ]; then
 
     echo "Authentication using key file"
-
     chmod 400 $KEY_PATH
-
-    ssh \
-    -i $KEY_PATH \
-    ${SSH_OPTIONS}
+    ssh -i $KEY_PATH "${SSH_OPTIONS[@]}"
+        
     
 else 
 
     echo "Key file not found, authenticating using password"
+    sshpass -p ${GATEWAY_PASSWORD} ssh "${SSH_OPTIONS[@]}"
 
-    sshpass -p ${GATEWAY_PASSWORD} \
-      ssh \
-      ${SSH_OPTIONS}
 fi
 
