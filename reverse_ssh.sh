@@ -11,12 +11,12 @@ GATEWAY_PORT="${GATEWAY_PORT:=22}"
 GATEWAY_FORWARD_PORT="${GATEWAY_FORWARD_PORT:=7070}"
 
 # HTTP Proxy if target is behind one
-PROXY_HOST="${PROXY_HOST:=80}"
+PROXY_PORT="${PROXY_PORT:=80}"
 
 
 echo "Starting reverse shell to ${TARGET_HOST}:${TARGET_PORT} using gateway ${GATEWAY_HOST}:${GATEWAY_PORT}"
 
-if [ -z ${PROXY+x} ]; then 
+if [ -z ${PROXY_HOST+x} ]; then 
     echo "Connecting without proxy"
 else
     echo "Proxy configuration provided: ${PROXY_HOST}:${PROXY_HOST}"
