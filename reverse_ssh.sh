@@ -21,6 +21,7 @@ SSH_OPTIONS="-N \
     -R 0.0.0.0:${GATEWAY_PORT}:${TARGET_HOST}:${TARGET_PORT} \
     -o ServerAliveInterval=60 \
     -o StrictHostKeyChecking=no \
+    -o ExitOnForwardFailure=yes \
     ${ADDITIONAL_OPTION} \
     ${GATEWAY_USERNAME}@${GATEWAY_HOST}"
 

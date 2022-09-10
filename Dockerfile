@@ -7,5 +7,5 @@ EXPOSE ${PORT}
 
 COPY ./reverse_ssh.sh /reverse_ssh.sh
 RUN chmod +x /reverse_ssh.sh
-ENTRYPOINT ["/reverse_ssh.sh"]
+CMD ["/reverse_ssh.sh"]
 
