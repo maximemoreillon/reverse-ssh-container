@@ -1,5 +1,5 @@
 #FROM alpine:latest
-FROM ubuntu:latest
+FROM ubuntu:20.04
 
 # openssh as ssh client
 # sshpass for password authentication
