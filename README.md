@@ -15,7 +15,7 @@ For more information, please have a look at this [Medium article](https://moreil
 | GATEWAY_PASSWORD | Password for the gateway, if no key is provided|
 | TARGET_HOST | Host to connect to, behind the firewall |
 | TARGET_PORT | Port on the target host, defaults to 22 |
-| PORT | The port on GATEWAY to use to connect to the TARGET |
+| OPTION | Additional ssh option, optional |
 
 ## Usage example
 ```
