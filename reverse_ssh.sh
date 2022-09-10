@@ -10,13 +10,17 @@ TARGET_PORT="${TARGET_PORT:=22}"
 GATEWAY_PORT="${GATEWAY_PORT:=22}"
 GATEWAY_FORWARD_PORT="${GATEWAY_FORWARD_PORT:=7070}"
 
+# HTTP Proxy if target is behind one
+PROXY_HOST="${PROXY_HOST:=80}"
+
+
 echo "Starting reverse shell to ${TARGET_HOST}:${TARGET_PORT} using gateway ${GATEWAY_HOST}:${GATEWAY_PORT}"
 
-if [ -z ${OPTION+x} ]; then 
-    echo "No additional option provided"
+if [ -z ${PROXY+x} ]; then 
+    echo "Connecting without proxy"
 else
-    echo "Additional option provided: ${OPTION}"
-    CUSTOM_OPTION="-o \"${OPTION}\""
+    echo "Proxy configuration provided: ${PROXY_HOST}:${PROXY_HOST}"
+    PROXY_OPTION="-o ProxyCommand=\"ncat --proxy ${PROXY_HOST}:${PROXY_HOST} %h %p\""
 fi
 
 
@@ -31,7 +35,10 @@ SSH_OPTIONS="-N \
 
 KEY_PATH=id_rsa
 
-echo ${SSH_OPTIONS}
+echo ""
+echo "[DEBUG] SSH command:"
+echo "ssh ${SSH_OPTIONS}"
+echo ""
 
 
 if [ -e $KEY_PATH ]; then
