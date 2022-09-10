@@ -7,7 +7,8 @@ TARGET_HOST="${TARGET_HOST:=localhost}"
 TARGET_PORT="${TARGET_PORT:=22}"
 
 # Gateway: a.k.a the server that is accessible from the ssh client
-GATEWAY_PORT="${GATEWAY_PORT:=7070}"
+GATEWAY_PORT="${GATEWAY_PORT:=22}"
+GATEWAY_FORWARD_PORT="${GATEWAY_FORWARD_PORT:=7070}"
 
 KEY_PATH=id_rsa
 
@@ -20,11 +21,12 @@ fi
 
 
 SSH_OPTIONS="-N \
-    -R 0.0.0.0:${GATEWAY_PORT}:${TARGET_HOST}:${TARGET_PORT} \
+    -R 0.0.0.0:${GATEWAY_FORWARD_PORT}:${TARGET_HOST}:${TARGET_PORT} \
     -o ServerAliveInterval=60 \
     -o StrictHostKeyChecking=no \
     -o ExitOnForwardFailure=yes \
     ${ADDITIONAL_OPTION} \
+    -p ${GATEWAY_PORT} \
     ${GATEWAY_USERNAME}@${GATEWAY_HOST}"
 
 
