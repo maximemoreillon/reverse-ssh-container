@@ -16,7 +16,7 @@ if [ -z ${OPTION+x} ]; then
     echo "No additional option provided"
 else
     echo "Additional option provided: ${OPTION}"
-    ADDITIONAL_OPTION="-o \"${OPTION}\""
+    ADDITIONAL_OPTION="-o ${OPTION}"
 fi
 
 
