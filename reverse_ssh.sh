@@ -9,11 +9,21 @@ GATEWAY_PORT="${GATEWAY_PORT:=7070}"
 
 KEY_PATH=id_rsa
 
+if [ -z ${OPTION+x} ]; then 
+    echo "No additional option provided"
+else
+    echo "Additional option provided: ${OPTION}"
+    ADDITIONAL_OPTION="-o \"${OPTION}\""
+fi
+
+
 SSH_OPTIONS="-N \
     -R 0.0.0.0:${GATEWAY_PORT}:${TARGET_HOST}:${TARGET_PORT} \
     -o ServerAliveInterval=60 \
     -o StrictHostKeyChecking=no \
+    ${ADDITIONAL_OPTION} \
     ${GATEWAY_USERNAME}@${GATEWAY_HOST}"
+
 
 echo "Reverse SSH container by Maxime MOREILLON"
 echo "Starting reverse shell to ${TARGET_HOST}:${TARGET_PORT} using gateway ${GATEWAY_HOST}:${GATEWAY_PORT}"
