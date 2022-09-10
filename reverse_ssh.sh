@@ -34,7 +34,6 @@ else
 
     sshpass -p ${GATEWAY_PASSWORD} \
       ssh \
-      -N \
       ${SSH_OPTIONS}
 fi
 
