@@ -10,7 +10,7 @@ TARGET_PORT="${TARGET_PORT:=22}"
 GATEWAY_PORT="${GATEWAY_PORT:=22}"
 GATEWAY_FORWARD_PORT="${GATEWAY_FORWARD_PORT:=7070}"
 
-KEY_PATH=id_rsa
+echo "Starting reverse shell to ${TARGET_HOST}:${TARGET_PORT} using gateway ${GATEWAY_HOST}:${GATEWAY_PORT}"
 
 if [ -z ${OPTION+x} ]; then 
     echo "No additional option provided"
@@ -29,8 +29,10 @@ SSH_OPTIONS="-N \
     -p ${GATEWAY_PORT} \
     ${GATEWAY_USERNAME}@${GATEWAY_HOST}"
 
+KEY_PATH=id_rsa
 
-echo "Starting reverse shell to ${TARGET_HOST}:${TARGET_PORT} using gateway ${GATEWAY_HOST}:${GATEWAY_PORT}"
+echo ${SSH_OPTIONS}
+
 
 if [ -e $KEY_PATH ]; then
 
