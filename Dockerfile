@@ -5,7 +5,8 @@ FROM alpine:latest
 # sshpass for password authentication
 # netcat for ssh via proxy
 RUN apk add --update --no-cache openssh sshpass nmap-ncat bash
-# RUN apt-get update && apt-get install -y openssh-client netcat sshpass
+
+#RUN apt-get update && apt-get install -y openssh-client netcat sshpass
 
 COPY ./reverse_ssh.sh /reverse_ssh.sh
 
