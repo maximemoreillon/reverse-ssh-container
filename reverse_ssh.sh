@@ -20,7 +20,7 @@ if [ -z ${PROXY_HOST+x} ]; then
     echo "Connecting without proxy"
 else
     echo "Proxy configuration provided: ${PROXY_HOST}:${PROXY_HOST}"
-    PROXY_OPTION="-o ProxyCommand=\"ncat --proxy ${PROXY_HOST}:${PROXY_HOST} %h %p\""
+    PROXY_OPTION="-o ProxyCommand=\"ncat --proxy ${PROXY_HOST}:${PROXY_PORT} %h %p\""
 fi
 
 
@@ -29,7 +29,7 @@ SSH_OPTIONS="-N \
     -o ServerAliveInterval=60 \
     -o StrictHostKeyChecking=no \
     -o ExitOnForwardFailure=yes \
-    ${CUSTOM_OPTION} \
+    ${PROXY_OPTION} \
     -p ${GATEWAY_PORT} \
     ${GATEWAY_USERNAME}@${GATEWAY_HOST}"
 
